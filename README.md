@@ -39,3 +39,17 @@ In **Active Directory** sono definiti vari gruppi di utenti, che stabiliscono:
 - Quali utenti possono accedere a specifici **servizi** e risorse in base ai loro ruoli e permessi.
 
 Questa configurazione centralizzata garantisce un controllo preciso su chi può accedere a determinate risorse e semplifica la gestione della sicurezza e delle autorizzazioni nella rete.
+
+### VM ITFENVEEM (Backup - Veeam)
+
+La VM **ITFENVEEM** (VM 104) esegue **Veeam**, un software per il **backup** e il **disaster recovery** delle VM all'interno del cluster. 
+
+- I backup vengono salvati su un **disco iSCSI** collegato alla VM, il quale punta a una **LUN** da **500 GB** configurata sul NAS.
+- I backup sono configurati per essere **incrementali**, riducendo così lo spazio di archiviazione utilizzato dopo il primo backup completo.
+
+La pianificazione dei **job di backup** è così suddivisa:
+
+- **Domain Controllers (VM ITFENDC01 e ITFENDC02)**: Viene effettuato un backup ogni **6 ore** per garantire la sicurezza e la disponibilità delle macchine critiche.
+- **Tutte le altre VM**: Il backup viene eseguito ogni **12 ore**.
+
+Questa configurazione assicura che i backup siano frequenti e mantengano lo stato aggiornato delle VM, minimizzando la perdita di dati in caso di guasto.
