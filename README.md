@@ -49,6 +49,15 @@ La VM **ITFENVEEM** (VM 104) esegue **Veeam**, un software per il **backup** e i
 
 La pianificazione dei **job di backup** è così suddivisa:
 
+### VM ITFENVPN (Server VPN)
+
+La VM **ITFENVPN** (VM 108) è configurata come **server VPN** utilizzando **OpenVPN Access Server (OpenVPN AS)**, per consentire connessioni remote sicure alla rete aziendale.
+
+- L'accesso alla VPN è gestito tramite **LDAP** collegato ad **Active Directory (AD)**, limitando l'accesso ai soli utenti appartenenti al gruppo **VpnUsers**.
+- I **permessi** di accesso alle varie macchine e reti interne sono gestiti tramite l'interfaccia amministrativa di OpenVPN AS, che consente di assegnare regole granulari per determinare quali utenti possono accedere a specifiche risorse.
+
+Questa configurazione garantisce che solo gli utenti autorizzati possano accedere alla rete interna tramite VPN, mantenendo un alto livello di sicurezza per le connessioni remote.
+
 - **Domain Controllers (VM ITFENDC01 e ITFENDC02)**: Viene effettuato un backup ogni **6 ore** per garantire la sicurezza e la disponibilità delle macchine critiche.
 - **Tutte le altre VM**: Il backup viene eseguito ogni **12 ore**.
 
