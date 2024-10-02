@@ -16,3 +16,11 @@ Sono configurate due **LUN**:
 - **LUN 2**: da **500 GB** dedicata ai backup gestiti tramite **Veeam**.
 
 Questa suddivisione permette una gestione efficiente dello storage, separando i dati operativi delle VM dai backup, e assicurando una maggiore sicurezza e facilità di recupero in caso di guasto.
+
+### VM di WSUS (Windows Server Update Services)
+
+La VM di **WSUS** gestisce l'aggiornamento dei server Windows nel dominio, con le seguenti caratteristiche principali:
+
+- **Ricerca degli aggiornamenti**: La VM esegue una ricerca degli aggiornamenti per **Windows Server 2022** due volte al giorno.
+- **Approva automaticamente** gli aggiornamenti critici e di sicurezza per tutti i server in dominio tramite una regola configurata nel WSUS.
+- Una **GPO** (Group Policy Object) è configurata per automatizzare l'installazione degli aggiornamenti sui server. Questa GPO specifica la modalità di notifica, di installazione e altre impostazioni riguardanti **Windows Update**, per garantire che gli aggiornamenti vengano installati senza richiedere l'intervento manuale degli amministratori, mantenendo i server sicuri e aggiornati.
