@@ -70,3 +70,11 @@ La VM **ITFENREV** (VM 103) è configurata come **reverse proxy** utilizzando **
 - Questa macchina è impostata per gestire il **redirect del traffico** verso il **Proxmox** senza dover specificare la porta **8006** nell'URL. In questo modo, l'accesso all'interfaccia di gestione di Proxmox è semplificato, evitando la necessità di inserire manualmente la porta nel browser.
 
 Questa configurazione migliora l'esperienza d'uso e fornisce una gestione più elegante del traffico verso il cluster Proxmox.
+
+### VM ITFENNTP (Server NTP)
+
+La VM **ITFENNTP** (VM 100) è configurata come **server NTP** (Network Time Protocol) per la rete.
+
+- Il server NTP è utilizzato per sincronizzare l'ora su tutti i dispositivi della rete, garantendo che ogni macchina e servizio utilizzi l'ora esatta e corretta.
+
+Questo assicura una gestione temporale coerente su tutti i sistemi, essenziale per log, autenticazioni e altre operazioni di rete sensibili all'orario.
