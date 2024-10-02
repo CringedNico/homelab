@@ -62,3 +62,11 @@ Questa configurazione garantisce che solo gli utenti autorizzati possano acceder
 - **Tutte le altre VM**: Il backup viene eseguito ogni **12 ore**.
 
 Questa configurazione assicura che i backup siano frequenti e mantengano lo stato aggiornato delle VM, minimizzando la perdita di dati in caso di guasto.
+
+### VM ITFENREV (Reverse Proxy)
+
+La VM **ITFENREV** (VM 103) è configurata come **reverse proxy** utilizzando **Apache**. 
+
+- Questa macchina è impostata per gestire il **redirect del traffico** verso il **Proxmox** senza dover specificare la porta **8006** nell'URL. In questo modo, l'accesso all'interfaccia di gestione di Proxmox è semplificato, evitando la necessità di inserire manualmente la porta nel browser.
+
+Questa configurazione migliora l'esperienza d'uso e fornisce una gestione più elegante del traffico verso il cluster Proxmox.
