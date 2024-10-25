@@ -4,11 +4,9 @@
 
 Il cluster è composto da:
 
-1. **Due nodi fisici Proxmox** (**ITFENPRX01** e **ITFENPRX02**)
+1. **Tre nodi fisici Proxmox** (**ITFENPRX01**, **ITFENPRX02**, **ITFENPRX03**)
 
-2. **Proxmox-qDevice** (**ITFENQDEV**): containerizzato con Docker sul NAS Synology. Questo dispositivo è configurato per partecipare al **quorum del cluster**, garantendo che il cluster rimanga operativo anche in caso di guasto a uno dei due nodi fisici, abilitando la funzionalità di **High Availability** (HA).
-
-Lo **storage** è condiviso attraverso una SAN e utilizza il protocollo **iSCSI** per connettere e gestire i volumi di storage tra i nodi. La configurazione iSCSI permette a ciascun nodo di accedere ai volumi remoti come se fossero locali, migliorando la flessibilità e la scalabilità della tua infrastruttura.
+Lo **storage** è condiviso attraverso una SAN e utilizza il protocollo **iSCSI** per connettere e gestire i volumi di storage tra i nodi. La configurazione iSCSI permette a ciascun nodo di accedere ai volumi remoti come se fossero locali, migliorando la flessibilità e la scalabilità dell'infrastruttura.
 
 Sono configurate due **LUN**:
 
@@ -48,6 +46,9 @@ La VM **ITFENVEEM** (VM 104) esegue **Veeam**, un software per il **backup** e i
 - I backup sono configurati per essere **incrementali**, riducendo così lo spazio di archiviazione utilizzato dopo il primo backup completo.
 
 La pianificazione dei **job di backup** è così suddivisa:
+
+- Backup dei domain controller ogni 6 ore, con 8 retention point.
+- Backup di tutte le altre vm ogni 12 ore, con 8 retention point.
 
 ### VM ITFENVPN (Server VPN)
 
