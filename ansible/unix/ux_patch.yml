@@ -1,0 +1,29 @@
+---
+- name: Unix Patching
+  hosts: ITFEN_UX
+  become: yes
+  gather_facts: true
+  tasks:
+    - name: Download security packages using DNF
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+        security: true
+        update_cache: true
+        download_only: true
+        
+    - name: Install security updates using DNF
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+        security: true
+
+    - name: Reboot the system if a new kernel was installed
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+        connect_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+        msg: "Rebooting the system to apply kernel updates"
+      when: ansible_kernel != ansible_kernel_previous
