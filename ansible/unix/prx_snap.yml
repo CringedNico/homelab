@@ -1,0 +1,48 @@
+---
+- name: Take a cold Snapshot of Proxmox VMs
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Load Proxmox VM hostnames from inventory
+      set_fact:
+        proxmox_vms: "{{ groups['itfen_ux'] | list }}"
+        
+    - name: Shutdown Proxmox VM to take a cold snapshot
+      community.general.proxmox_kvm:
+        api_user: ansible@ads
+        api_password: ************************
+        api_host: 192.168.1.70
+        name: "{{ item }}"
+        state: stopped
+      loop: "{{ proxmox_vms }}"
+
+    - name: Pause for 30 seconds
+      ansible.builtin.pause:
+        seconds: 30
+
+    - name: Take a snapshot of each Proxmox VM
+      community.general.proxmox_snap:
+        api_user: ansible@ads
+        api_password: ************************
+        api_host: 192.168.1.70
+        hostname: "{{ item }}"
+        snapname: Ansible_AutoPatching_Snapshot_{{ '%Y-%m-%d' | strftime }}
+        description: Snapshot per patching automatizzato eseguita da Ansible.
+      loop: "{{ proxmox_vms }}"
+
+    - name: Pause for 30 seconds
+      ansible.builtin.pause:
+        seconds: 30
+
+    - name: Start Proxmox VM after cold snapshot
+      community.general.proxmox_kvm:
+        api_user: ansible@ads
+        api_password: ************************
+        api_host: 192.168.1.70
+        name: "{{ item }}"
+        state: started
+      loop: "{{ proxmox_vms }}"
+
+    - name: Pause for 60 seconds
+      ansible.builtin.pause:
+        seconds: 60
