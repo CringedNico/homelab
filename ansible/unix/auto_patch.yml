@@ -1,0 +1,9 @@
+---
+  - name: Suspend
+    import_playbook: zbx_suspend.yml
+  
+  - name: Snapshot
+    import_playbook: prx_snap.yml
+    
+  - name: Patch
+    import_playbook: ux_patch.yml
